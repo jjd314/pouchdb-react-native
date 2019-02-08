@@ -25,7 +25,10 @@ export const toSequenceKeys = list => list.map(forSequence)
 export const getDocumentKeys = list =>
   list
     .filter(
-      key => key.startsWith(DOC_STORE) && !key.startsWith(`${DOC_STORE}_local`)
+      key => {
+        key = JSON.parse(JSON.stringify(key))
+        return key.startsWith(DOC_STORE) && !key.startsWith(`${DOC_STORE}_local`)
+      }
     )
     .map(key => key.slice(DOC_STORE_LENGTH))
 
